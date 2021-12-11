@@ -1,9 +1,9 @@
-# :package_description
+# A package to simplify complex stub workflows.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/run-tests?label=tests)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/Check%20&%20fix%20styling?label=code%20style)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/ralphjsmit/stubs.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/stubs)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/stubs/run-tests?label=tests)](https://github.com/ralphjsmit/stubs/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/stubs/Check%20&%20fix%20styling?label=code%20style)](https://github.com/ralphjsmit/stubs/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/ralphjsmit/stubs.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/stubs)
 
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
@@ -12,19 +12,19 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require ralphjsmit/stubs
 ```
 
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug_without_prefix-migrations"
+php artisan vendor:publish --tag="stubs_without_prefix-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --tag=":package_slug_without_prefix-config"
+php artisan vendor:publish --tag="stubs_without_prefix-config"
 ```
 
 Optionally, you can publish the views using
@@ -43,8 +43,8 @@ return [
 ## Usage
 
 ```php
-$skeleton = new VendorName\Skeleton();
-echo $skeleton->echoPhrase('Hello, VendorName!');
+$stubs = new RalphJSmit\Stubs();
+echo $stubs->echoPhrase('Hello, RalphJSmit!');
 ```
 
 ## Testing
@@ -67,7 +67,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Ralph J. Smit](https://github.com/ralphjsmit)
 - [All Contributors](../../contributors)
 
 ## License
