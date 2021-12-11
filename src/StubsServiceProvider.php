@@ -2,9 +2,9 @@
 
 namespace RalphJSmit\Stubs;
 
+use RalphJSmit\Stubs\Commands\StubsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use RalphJSmit\Stubs\Commands\StubsCommand;
 
 class StubsServiceProvider extends PackageServiceProvider
 {
