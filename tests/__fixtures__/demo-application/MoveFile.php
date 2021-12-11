@@ -1,3 +1,5 @@
 <?php
 
-class MoveFile { }
+class MoveFile
+{
+}
