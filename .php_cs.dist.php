@@ -39,5 +39,13 @@ return ( new PhpCsFixer\Config() )
             'keep_multiple_spaces_after_comma' => true,
         ],
         'single_trait_insert_per_statement' => true,
+        'array_push' => true,
+        'backtick_to_shell_exec' => true,
+        'ereg_to_preg' => true,
+        'no_alias_language_construct_call' => true,
+        'no_mixed_echo_print' => true,
+        'pow_to_exponentiation' => true,
+        'random_api_migration' => true,
+        'set_type_to_cast' => true,
     ])
     ->setFinder($finder);
