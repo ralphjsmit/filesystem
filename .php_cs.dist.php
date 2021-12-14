@@ -10,11 +10,14 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
-return (new PhpCsFixer\Config())
+return ( new PhpCsFixer\Config() )
     ->setRules([
         '@PSR12' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
+        'braces' => [
+            'allow_single_line_anonymous_class_with_empty_body' => true,
+        ],
         'no_unused_imports' => true,
         'not_operator_with_successor_space' => true,
         'trailing_comma_in_multiline' => true,
