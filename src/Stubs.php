@@ -21,4 +21,3 @@ class Stubs
         return $file = new File($filepath);
     }
 }
-

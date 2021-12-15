@@ -6,7 +6,8 @@ class File
 {
     public function __construct(
         public string $filepath
-    ) {}
+    ) {
+    }
 
     public function copy(string $destinationPath): static
     {
