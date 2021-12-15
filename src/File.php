@@ -6,7 +6,8 @@ class File
 {
     public function __construct(
         public string $filepath
-    ) {}
+    ) {
+    }
 
     public function copy(string $destinationPath): static
     {
@@ -28,7 +29,7 @@ class File
 
     public function putFile(string $destinationPath, mixed $contents): static
     {
-        if ( ! file_exists(dirname($destinationPath)) ) {
+        if (! file_exists(dirname($destinationPath))) {
             mkdir(dirname($destinationPath), 0777, true);
         }
 
