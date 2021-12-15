@@ -10,7 +10,6 @@ class File
 
     public function copy(string $destinationPath): static
     {
-        dump($this->filepath);
         $contents = file_get_contents(
             "/Users/ralphjsmit/Library/Mobile Documents/com~apple~CloudDocs/Work/Development/Packages/stubs/tests/__fixtures__/demo-application/MoveFile.php"
         );
