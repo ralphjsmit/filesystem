@@ -18,7 +18,7 @@ it('it can copy a file to a new location', function () {
     expect(
         file_get_contents(__DIR__ . '/__fixtures__/demo-application/CopyFile.php')
     )->toBe(
-        file_get_contents(__DIR__ . '/tmp/demo-application/MoveFile.php')
+        file_get_contents(__DIR__ . '/tmp/demo-application/CopyFile.php')
     );
 });
 
