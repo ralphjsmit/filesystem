@@ -5,27 +5,29 @@ namespace RalphJSmit\Stubs;
 class Stubs
 {
     public function __construct(
-        protected array $namespaces = []
+        protected string $basepath = '',
+        protected array $namespaces = [],
     ) {}
+
+    public static function dir(string $basepath): static
+    {
+        return new static($basepath);
+    }
 
     public static function file(string $filepath): File
     {
         return new File(
-            $filepath
+            filepath: $filepath,
         );
     }
 
     public function getFile(string $filepath): File
     {
         return new File(
-            $filepath,
-            $this->namespaces
+            filepath  : $filepath,
+            basepath  : $this->basepath,
+            namespaces: $this->namespaces,
         );
-    }
-
-    public static function new(array $namespaces = []): static
-    {
-        return new static($namespaces);
     }
 
     public function namespaces(array $namespaces): static
@@ -38,5 +40,12 @@ class Stubs
         );
 
         return $this;
+    }
+
+    public static function new(array $namespaces = []): static
+    {
+        return new static(
+            namespaces: $namespaces,
+        );
     }
 }

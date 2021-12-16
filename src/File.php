@@ -9,7 +9,8 @@ class File
 {
     public function __construct(
         public string $filepath,
-        protected array $namespaces = []
+        protected string $basepath = '',
+        protected array $namespaces = [],
     ) {}
 
     public function copy(string $destinationPath): static
@@ -32,12 +33,11 @@ class File
             $destinationPath = $this->filepath;
         }
 
-        if ( ! file_exists(dirname($destinationPath)) ) {
-            mkdir(dirname($destinationPath), 0777, true);
+        if ( ! file_exists(dirname($this->basepath . $destinationPath)) ) {
+            mkdir(dirname($this->basepath . $destinationPath), 0777, true);
         }
 
-        dump($destinationPath);
-        file_put_contents($destinationPath, $contents);
+        file_put_contents($this->basepath . $destinationPath, $contents);
 
         return new static($destinationPath);
     }
@@ -64,12 +64,12 @@ class File
 
     public function getContents(): string
     {
-        return file_get_contents($this->filepath);
+        return file_get_contents($this->basepath . $this->filepath);
     }
 
     public function delete(): void
     {
-        unlink($this->filepath);
+        unlink($this->basepath . $this->filepath);
     }
 
     public function replaceNamespace(string $namespace): static
@@ -87,13 +87,12 @@ class File
 
     public function namespace(string $namespace): static
     {
-        $namespaceRoot = Str::of($namespace)->before('\\');
         $namespaceSubfolder = Str::of($namespace)->after('\\')->replace('\\', '/');
 
-        $namespaceRootFolder = $this->namespaces[(string) $namespaceRoot] ?? throw new NamespaceNotFoundException();
-
-        $target = $this->putInFolder($namespaceRootFolder . $namespaceSubfolder)
-            ->replaceNamespace(Str::of($namespace));
+        $namespaceRoot = $this->namespaces[Str::before($namespace, '\\')] ?? throw new NamespaceNotFoundException();
+        $target = $this->putInFolder(
+            $namespaceRoot . $namespaceSubfolder
+        )->replaceNamespace(Str::of($namespace));
 
         $this->delete();
 
