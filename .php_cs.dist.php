@@ -58,11 +58,6 @@ return ( new PhpCsFixer\Config() )
                 [
                     'tokens' => ['continue', 'curly_brace_block', 'extra', 'return', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use', 'switch', 'case', 'default',],
                 ],
-            'no_spaces_around_offset' => [
-                'positions' => [
-                    ['inside', 'outside'],
-                ],
-            ],
             'no_trailing_whitespace' => true,
             'types_spaces' => [
                 'space' => 'none',
