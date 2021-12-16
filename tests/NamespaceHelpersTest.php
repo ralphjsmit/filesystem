@@ -4,7 +4,7 @@ use RalphJSmit\Stubs\Exceptions\NamespaceNotFoundException;
 use RalphJSmit\Stubs\Stubs;
 
 beforeEach(function () {
-    if ( file_exists(__DIR__ . '/tmp') ) {
+    if (file_exists(__DIR__ . '/tmp')) {
         rmdir_recursive(__DIR__ . '/tmp');
     }
 
@@ -17,12 +17,12 @@ beforeEach(function () {
 
 it('it can update the namespace of a file', function () {
     $contents = <<<PHP
-    <?php
+        <?php
 
-    namespace App\Models;
+        namespace App\Models;
 
-    class User extends Model {}
-    PHP;
+        class User extends Model {}
+        PHP;
 
     Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
         ->putFile($contents);
@@ -34,12 +34,12 @@ it('it can update the namespace of a file', function () {
     expect(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/User.php')
         ->toHaveContents(
             <<<PHP
-            <?php
+                <?php
             
-            namespace Domain\Auth\Models;
+                namespace Domain\Auth\Models;
             
-            class User extends Model {}
-            PHP
+                class User extends Model {}
+                PHP
         )
         ->toHaveNamespace('Domain\Auth\Models');
 });

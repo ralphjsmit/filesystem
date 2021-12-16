@@ -2,4 +2,6 @@
 
 namespace RalphJSmit\Stubs\Exceptions;
 
-class NamespaceNotFoundException extends \Exception { }
+class NamespaceNotFoundException extends \Exception
+{
+}

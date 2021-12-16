@@ -3,7 +3,7 @@
 use RalphJSmit\Stubs\Stubs;
 
 beforeEach(function () {
-    if ( file_exists(__DIR__ . '/tmp') ) {
+    if (file_exists(__DIR__ . '/tmp')) {
         rmdir_recursive(__DIR__ . '/tmp');
     }
 
