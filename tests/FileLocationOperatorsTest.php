@@ -13,7 +13,7 @@ beforeEach(function () {
     $this->stubs = Stubs::dir(__DIR__);
 });
 
-it('it can copy a file to a new location', function () {
+it('can copy a file to a new location', function () {
     Stubs::file(__DIR__ . '/__fixtures__/demo-application/CopyFile.php')
         ->copy(__DIR__ . '/tmp/demo-application');
 
@@ -24,7 +24,7 @@ it('it can copy a file to a new location', function () {
     );
 });
 
-it('it can move a file to a new location', function () {
+it('can move a file to a new location', function () {
     Stubs::file(__DIR__ . '/__fixtures__/demo-application/MoveFile.php')
         ->copy(__DIR__ . '/tmp/demo-application/a');
 
@@ -38,7 +38,7 @@ it('it can move a file to a new location', function () {
     expect(__DIR__ . '/tmp/demo-application/b/MoveFile.php')->toHaveContents($contents);
 });
 
-it('it can copy a file to a new location with relative __DIR__', function () {
+it('can copy a file to a new location with relative __DIR__', function () {
     $this->stubs->getFile('/__fixtures__/demo-application/CopyFile.php')
         ->copy('/tmp/demo-application');
 
@@ -49,7 +49,7 @@ it('it can copy a file to a new location with relative __DIR__', function () {
     );
 });
 
-it('it can move a file to a new location with relative __DIR__', function () {
+it('can move a file to a new location with relative __DIR__', function () {
     $this->stubs->getFile('/__fixtures__/demo-application/MoveFile.php')
         ->copy('/tmp/demo-application/a');
 

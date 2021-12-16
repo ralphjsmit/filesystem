@@ -15,7 +15,7 @@ beforeEach(function () {
         ->copy(__DIR__ . '/tmp/demo-application/App/Models/');
 });
 
-it('it can update the namespace of a file', function () {
+it('can update the namespace of a file', function () {
     $contents = <<<PHP
     <?php
 
