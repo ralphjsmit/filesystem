@@ -11,8 +11,7 @@ class File
         public string $filepath,
         protected string $basepath = '',
         protected array $namespaces = [],
-    ) {
-    }
+    ) {}
 
     public function copy(string $destinationPath): static
     {
@@ -23,18 +22,54 @@ class File
         );
     }
 
+    public function delete(): void
+    {
+        unlink($this->basepath . $this->filepath);
+    }
+
     public function getBasename(): string
     {
         return basename($this->filepath);
     }
 
+    public function getContents(): string
+    {
+        return file_get_contents($this->basepath . $this->filepath);
+    }
+
+    public function move(string $destinationFolder): static
+    {
+        $newFile = $this->putFile(
+            $this->getContents(),
+            rtrim($destinationFolder, '/') . '/' . $this->getBasename()
+        );
+
+        $this->delete();
+
+        return $newFile;
+    }
+
+    public function namespace(string $namespace): static
+    {
+        $namespaceSubfolder = Str::of($namespace)->after('\\')->replace('\\', '/');
+
+        $namespaceRoot = $this->namespaces[Str::before($namespace, '\\')] ?? throw new NamespaceNotFoundException();
+        $target = $this->putInFolder(
+            $namespaceRoot . $namespaceSubfolder
+        )->replaceNamespace(Str::of($namespace));
+
+        $this->delete();
+
+        return $target;
+    }
+
     public function putFile(mixed $contents, string $destinationPath = null): static
     {
-        if (! $destinationPath) {
+        if ( ! $destinationPath ) {
             $destinationPath = $this->filepath;
         }
 
-        if (! file_exists(dirname($this->basepath . $destinationPath))) {
+        if ( ! file_exists(dirname($this->basepath . $destinationPath)) ) {
             mkdir(dirname($this->basepath . $destinationPath), 0777, true);
         }
 
@@ -51,28 +86,6 @@ class File
         );
     }
 
-    public function move(string $destinationFolder): static
-    {
-        $newFile = $this->putFile(
-            $this->getContents(),
-            rtrim($destinationFolder, '/') . '/' . $this->getBasename()
-        );
-
-        $this->delete();
-
-        return $newFile;
-    }
-
-    public function getContents(): string
-    {
-        return file_get_contents($this->basepath . $this->filepath);
-    }
-
-    public function delete(): void
-    {
-        unlink($this->basepath . $this->filepath);
-    }
-
     public function replaceNamespace(string $namespace): static
     {
         $contents = $this->getContents();
@@ -84,19 +97,5 @@ class File
         );
 
         return $this->putFile($contents);
-    }
-
-    public function namespace(string $namespace): static
-    {
-        $namespaceSubfolder = Str::of($namespace)->after('\\')->replace('\\', '/');
-
-        $namespaceRoot = $this->namespaces[Str::before($namespace, '\\')] ?? throw new NamespaceNotFoundException();
-        $target = $this->putInFolder(
-            $namespaceRoot . $namespaceSubfolder
-        )->replaceNamespace(Str::of($namespace));
-
-        $this->delete();
-
-        return $target;
     }
 }
