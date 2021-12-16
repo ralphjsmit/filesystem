@@ -24,9 +24,6 @@ return ( new PhpCsFixer\Config() )
         'phpdoc_scalar' => true,
         'unary_operator_spaces' => true,
         'binary_operator_spaces' => true,
-        'blank_line_before_statement' => [
-            'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
-        ],
         'phpdoc_single_line_var_spacing' => true,
         'phpdoc_var_without_name' => true,
         'class_attributes_separation' => [
@@ -47,5 +44,22 @@ return ( new PhpCsFixer\Config() )
         'pow_to_exponentiation' => true,
         'random_api_migration' => true,
         'set_type_to_cast' => true,
+        'array_indentation' => true,
+        'blank_line_before_statement' => [
+            'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try', 'do', 'exit', 'goto', 'if', 'switch', 'yield'],
+            // Check for support with if conditions and early returns in a function
+        ],
+        'compact_nullable_typehint' => true,
+        'heredoc_indentation' => true,
+        'line_ending' => true,
+        'method_chaining_indentation' => true, // Check for support with chained methods
+        'tokens' => ['continue', 'curly_brace_block', 'extra', 'return', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use', 'switch', 'case', 'default',],
+        'no_spaces_around_offset' => [
+            ['inside', 'outside'],
+        ],
+        'no_trailing_whitespace' => true,
+        'types_spaces' => [
+            'space' => 'none',
+        ],
     ])
     ->setFinder($finder);
