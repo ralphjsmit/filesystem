@@ -35,9 +35,9 @@ it('can update the namespace of a file', function () {
         ->toHaveContents(
             <<<PHP
                 <?php
-            
+
                 namespace Domain\Auth\Models;
-            
+
                 class User extends Model {}
                 PHP
         )
