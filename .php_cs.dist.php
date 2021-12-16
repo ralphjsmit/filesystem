@@ -53,7 +53,10 @@ return ( new PhpCsFixer\Config() )
         'heredoc_indentation' => true,
         'line_ending' => true,
         'method_chaining_indentation' => true, // Check for support with chained methods
-        'no_extra_blank_lines' => ['continue', 'curly_brace_block', 'extra', 'return', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use', 'switch', 'case', 'default',],
+        'no_extra_blank_lines' =>
+            [
+                'tokens' => ['continue', 'curly_brace_block', 'extra', 'return', 'parenthesis_brace_block', 'square_brace_block', 'throw', 'use', 'switch', 'case', 'default',],
+            ],
         'no_spaces_around_offset' => [
             ['inside', 'outside'],
         ],
