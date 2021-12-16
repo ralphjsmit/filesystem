@@ -3,20 +3,18 @@
 namespace RalphJSmit\Stubs;
 
 use Illuminate\Support\Str;
+use RalphJSmit\Stubs\Exceptions\NamespaceNotFoundException;
 
 class File
 {
     public function __construct(
-        public string $filepath
+        public string $filepath,
+        protected array $namespaces = []
     ) {}
 
     public function copy(string $destinationPath): static
     {
-        $contents = file_get_contents(
-            $this->filepath
-        );
-
-        $this->putInFolder($destinationPath, $contents);
+        $this->putInFolder($destinationPath, $this->getContents());
 
         return new static(
             $destinationPath . '/' . $this->getBasename()
@@ -38,6 +36,7 @@ class File
             mkdir(dirname($destinationPath), 0777, true);
         }
 
+        dump($destinationPath);
         file_put_contents($destinationPath, $contents);
 
         return new static($destinationPath);
@@ -84,5 +83,20 @@ class File
         );
 
         return $this->putFile($contents);
+    }
+
+    public function namespace(string $namespace): static
+    {
+        $namespaceRoot = Str::of($namespace)->before('\\');
+        $namespaceSubfolder = Str::of($namespace)->after('\\')->replace('\\', '/');
+
+        $namespaceRootFolder = $this->namespaces[(string) $namespaceRoot] ?? throw new NamespaceNotFoundException();
+
+        $target = $this->putInFolder($namespaceRootFolder . $namespaceSubfolder)
+            ->replaceNamespace(Str::of($namespace));
+
+        $this->delete();
+
+        return $target;
     }
 }

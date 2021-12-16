@@ -4,20 +4,39 @@ namespace RalphJSmit\Stubs;
 
 class Stubs
 {
-    //    public static function copy(string $source, string $destinationFolder)
-    //    {
-    //        $basename = basename($source);
-    //        $sourceFolder = dirname(__DIR__ . '/' . $source);
-    //
-    //        dump($basename);
-    //        dump($sourceFolder);
-    //        $contents = file_get_contents($sourceFolder . '/' . $basename);
-    //
-    //        file_put_contents($sourceFolder . $basename, $contents);
-    //    }
+    public function __construct(
+        protected array $namespaces = []
+    ) {}
 
-    public static function file(string $filepath)
+    public static function file(string $filepath): File
     {
-        return $file = new File($filepath);
+        return new File(
+            $filepath
+        );
+    }
+
+    public function getFile(string $filepath): File
+    {
+        return new File(
+            $filepath,
+            $this->namespaces
+        );
+    }
+
+    public static function new(array $namespaces = []): static
+    {
+        return new static($namespaces);
+    }
+
+    public function namespaces(array $namespaces): static
+    {
+        $this->namespaces = array_merge(
+            $this->namespaces,
+            collect($namespaces)->mapWithKeys(function ($folder, $namespace) {
+                return [$namespace => rtrim($folder, '/') . '/'];
+            })->all()
+        );
+
+        return $this;
     }
 }
