@@ -8,8 +8,7 @@ class File
 {
     public function __construct(
         public string $filepath
-    ) {
-    }
+    ) {}
 
     public function copy(string $destinationPath): static
     {
@@ -17,7 +16,7 @@ class File
             $this->filepath
         );
 
-        $this->putInFolder($contents, $destinationPath);
+        $this->putInFolder($destinationPath, $contents);
 
         return new static(
             $destinationPath . '/' . $this->getBasename()
@@ -31,11 +30,11 @@ class File
 
     public function putFile(mixed $contents, string $destinationPath = null): static
     {
-        if (! $destinationPath) {
+        if ( ! $destinationPath ) {
             $destinationPath = $this->filepath;
         }
 
-        if (! file_exists(dirname($destinationPath))) {
+        if ( ! file_exists(dirname($destinationPath)) ) {
             mkdir(dirname($destinationPath), 0777, true);
         }
 
@@ -44,9 +43,12 @@ class File
         return new static($destinationPath);
     }
 
-    public function putInFolder(mixed $contents, string $destinationFolder): static
+    public function putInFolder(string $destinationFolder, mixed $contents = null): static
     {
-        return $this->putFile($contents, rtrim($destinationFolder, '/') . '/' . $this->getBasename());
+        return $this->putFile(
+            $contents ?? $this->getContents(),
+            rtrim($destinationFolder, '/') . '/' . $this->getBasename()
+        );
     }
 
     public function move(string $destinationFolder): static
