@@ -29,7 +29,6 @@ it('it can update the namespace of a file', function () {
         ->putInFolder(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/')
         ->replaceNamespace('Domain\Auth\Models');
 
-    dump(file_get_contents(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/User.php'));
     expect(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/User.php')
         ->toHaveContents(
             <<<PHP
