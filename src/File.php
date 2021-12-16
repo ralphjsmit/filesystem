@@ -2,6 +2,8 @@
 
 namespace RalphJSmit\Stubs;
 
+use Illuminate\Support\Str;
+
 class File
 {
     public function __construct(
@@ -66,5 +68,18 @@ class File
     public function delete(): void
     {
         unlink($this->filepath);
+    }
+
+    public function replaceNamespace(string $namespace): static
+    {
+        $contents = $this->getContents();
+
+        $contents = Str::replace(
+            Str::of($contents)->after('namespace ')->before(';'),
+            $namespace,
+            $contents
+        );
+
+        return $this->putFile($contents);
     }
 }
