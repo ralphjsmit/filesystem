@@ -1,13 +1,12 @@
 <?php
 
+use function RalphJSmit\PestPluginFilesystem\rmdir_recursive;
 use RalphJSmit\Stubs\Stubs;
 use RalphJSmit\Stubs\Tests\TestCase;
 
-use function RalphJSmit\PestPluginFilesystem\rmdir_recursive;
-
 uses(TestCase::class)
     ->beforeEach(function () {
-        if ( file_exists(__DIR__ . '/tmp') ) {
+        if (file_exists(__DIR__ . '/tmp')) {
             rmdir_recursive(__DIR__ . '/tmp');
         }
 
