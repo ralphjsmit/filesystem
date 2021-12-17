@@ -3,18 +3,6 @@
 use RalphJSmit\Stubs\Exceptions\NamespaceNotFoundException;
 use RalphJSmit\Stubs\Stubs;
 
-beforeEach(function () {
-    if (file_exists(__DIR__ . '/tmp')) {
-        rmdir_recursive(__DIR__ . '/tmp');
-    }
-
-    mkdir(__DIR__ . '/tmp', 0777, true);
-    mkdir(__DIR__ . '/tmp/demo-application', 0777, true);
-
-    Stubs::file(__DIR__ . '/__fixtures__/demo-application/App/Models/MyModel.php')
-        ->copy(__DIR__ . '/tmp/demo-application/App/Models/');
-});
-
 it('can update the namespace of a file', function () {
     $contents = <<<PHP
         <?php
