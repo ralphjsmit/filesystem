@@ -11,15 +11,16 @@ class File
         public string $filepath,
         protected string $basepath = '',
         protected array $namespaces = [],
-    ) {
-    }
+    ) {}
 
     public function copy(string $destinationPath): static
     {
         $this->putInFolder($destinationPath, $this->getContents());
 
         return new static(
-            $destinationPath . '/' . $this->getBasename()
+            filepath  : $destinationPath . '/' . $this->getBasename(),
+            basepath  : $this->basepath,
+            namespaces: $this->namespaces,
         );
     }
 
@@ -33,9 +34,19 @@ class File
         return basename($this->filepath);
     }
 
+    public function getBasepath(): string
+    {
+        return $this->basepath;
+    }
+
     public function getContents(): string
     {
         return file_get_contents($this->basepath . $this->filepath);
+    }
+
+    public function getNamespaces(): array
+    {
+        return $this->namespaces;
     }
 
     public function move(string $destinationFolder): static
@@ -66,17 +77,21 @@ class File
 
     public function putFile(mixed $contents, string $destinationPath = null): static
     {
-        if (! $destinationPath) {
+        if ( ! $destinationPath ) {
             $destinationPath = $this->filepath;
         }
 
-        if (! file_exists(dirname($this->basepath . $destinationPath))) {
+        if ( ! file_exists(dirname($this->basepath . $destinationPath)) ) {
             mkdir(dirname($this->basepath . $destinationPath), 0777, true);
         }
 
         file_put_contents($this->basepath . $destinationPath, $contents);
 
-        return new static($destinationPath);
+        return new static(
+            filepath  : $destinationPath,
+            basepath  : $this->basepath,
+            namespaces: $this->namespaces,
+        );
     }
 
     public function putInFolder(string $destinationFolder, mixed $contents = null): static

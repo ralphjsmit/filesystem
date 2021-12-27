@@ -7,8 +7,7 @@ class Stubs
     public function __construct(
         protected string $basepath = '',
         protected array $namespaces = [],
-    ) {
-    }
+    ) {}
 
     public static function dir(string $basepath): static
     {
@@ -22,6 +21,11 @@ class Stubs
         );
     }
 
+    public function getBasepath(): string
+    {
+        return $this->basepath;
+    }
+
     public function getFile(string $filepath): File
     {
         return new File(
@@ -29,6 +33,11 @@ class Stubs
             basepath  : $this->basepath,
             namespaces: $this->namespaces,
         );
+    }
+
+    public function getNamespaces(): array
+    {
+        return $this->namespaces;
     }
 
     public function namespaces(array $namespaces): static
