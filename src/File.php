@@ -106,7 +106,7 @@ class File
     {
         $contents = $this->getContents();
 
-        $contents = Str::replace(
+        $contents = Str::replaceFirst(
             Str::of($contents)->after('namespace ')->before(';'),
             $namespace,
             $contents

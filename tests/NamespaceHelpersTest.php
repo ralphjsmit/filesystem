@@ -9,7 +9,9 @@ it('can update the namespace of a file', function () {
 
         namespace App\Models;
 
-        class User extends Model {}
+        class User extends Model {
+            public string \$test = 'namespace App\Models';
+        }
         PHP;
 
     Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
@@ -26,7 +28,9 @@ it('can update the namespace of a file', function () {
 
                 namespace Domain\Auth\Models;
 
-                class User extends Model {}
+                class User extends Model {
+                    public string \$test = 'namespace App\Models';
+                }
                 PHP
         )
         ->toHaveNamespace('Domain\Auth\Models');
