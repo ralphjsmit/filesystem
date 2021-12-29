@@ -52,7 +52,8 @@ $stubs->getFile('tmp/TestFileA.php')->namespace('Support/Models');
 ```
 
 You can also have multiple stubs together:
-```
+
+```php
 $stubTemp = Stub::dir(__DIR__ . '/tmp');
 $stubApp = Stub::dir(__DIR__ . '/tmp');
 ```
