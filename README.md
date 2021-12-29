@@ -1,11 +1,8 @@
-# A package to simplify complex stub workflows.
+# Simplify complex stub workflows.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/ralphjsmit/stubs.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/stubs)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/stubs/run-tests?label=tests)](https://github.com/ralphjsmit/stubs/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/ralphjsmit/stubs/Check%20&%20fix%20styling?label=code%20style)](https://github.com/ralphjsmit/stubs/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/ralphjsmit/stubs.svg?style=flat-square)](https://packagist.org/packages/ralphjsmit/stubs)
+This helps to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+[![Run Tests](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml)
 
 ## Installation
 
@@ -15,61 +12,67 @@ You can install the package via composer:
 composer require ralphjsmit/stubs
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="stubs_without_prefix-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-```bash
-php artisan vendor:publish --tag="stubs_without_prefix-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="example-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
+This package works by providing you with a base `Stub` class and a `File` class. As the name implies, the `Stub` class is an object that contains specific configuration, like the namespaces and the base directory. The `File` class is used to represent an individual file.
+
+### Creating a Stub configuration
+
+You can create a new `Stub` configuration with `Stub::new()`:
+
 ```php
-$stubs = new RalphJSmit\Stubs();
-echo $stubs->echoPhrase('Hello, RalphJSmit!');
+use RalphJSmit\Stubs\Stubs;
+
+$stub = Stub::new();
 ```
 
-## Testing
-
-```bash
-composer test
+Next, use it like this:
+```php
+$stub->getFile(__DIR__ . '/tmp/testFileA.php')->move(__DIR__ . '/tmp/otherFolder');
 ```
 
-## Changelog
+You can also set a base directory for your `Stub`:
+```php
+$stub = Stub::dir(__DIR__);
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+$stub->getFile('/tmp/testFileA.php')->move('/tmp/otherFolder');
+```
 
-## Contributing
+If you already have a `$stub` instance, you can configure namespaces on them. Those namespaces are used on the `File` object for the `->namespace()` action. It basically means that you define the directories for each namespace in your project.
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+```php
+$stubs = Stubs::dir(__DIR__)->namespaces([
+    'Support' => '/src/Support/',
+    'Domain' => '/src/Domain/',
+    'App' => '/src/App/',
+]);
 
-## Security Vulnerabilities
+$stubs->getFile('tmp/TestFileA.php')->namespace('Support/Models');
+// Moves __DIR__ . `tmp/testFileA.php` to __DIR__ . `/src/Support/Models/testFileA.php`.
+```
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+You can also have multiple stubs together:
+```
+$stubTemp = Stub::dir(__DIR__ . '/tmp');
+$stubApp = Stub::dir(__DIR__ . '/tmp');
+```
 
-## Credits
+## Getting a File object
 
-- [Ralph J. Smit](https://github.com/ralphjsmit)
-- [All Contributors](../../contributors)
+You can get a `File` object by directly calling `file()` on the `Stub` class:
 
-## License
+```php
+$file = Stub::file(__DIR__ . '/tmp/testFileA.php`);
+```
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+You can also get a `File` object from a `$stub` instance:
+
+```php
+$stub = Stub::dir(__DIR__);
+
+$file = $stub->getFile('/tmp/testFileA.php`);
+```
+
+### Actions on a File object
+
+If you have a `File` object, you can perform the following actions on it:
