@@ -17,9 +17,11 @@ it('can update the namespace of a file', function () {
     Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
         ->putFile($contents);
 
-    Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
-        ->putInFolder(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/')
-        ->replaceNamespace('Domain\Auth\Models');
+    $file = Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
+        ->putInFolder(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/');
+
+    $updatedFile = $file->replaceNamespace('Domain\Auth\Models');
+    expect($file)->toBe($updatedFile);
 
     expect(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/User.php')
         ->toHaveContents(

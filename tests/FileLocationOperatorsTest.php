@@ -12,7 +12,8 @@ it('can copy a file to a new location', function () {
         file_get_contents(__DIR__ . '/tmp/demo-application/CopyFile.php')
     );
 
-    expect($file->filepath)->toBe(__DIR__ . '/tmp/demo-application/CopyFile.php');
+    expect($file->getFilepath())->toBe(__DIR__ . '/tmp/demo-application/CopyFile.php');
+    expect($file->getDirectory())->toBe(__DIR__ . '/tmp/demo-application');
 });
 
 it('can move a file to a new location', function () {
