@@ -77,3 +77,118 @@ $file = $stub->getFile('/tmp/testFileA.php`);
 ### Actions on a File object
 
 If you have a `File` object, you can perform the following actions on it:
+
+#### Copying a file
+
+You can copy a file to a new **directory** using the `copy()` function:
+
+```php
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->copy('/tmp/test');
+// $file is now in __DIR__ . '/tmp/testFileA.php' AND in __DIR__ . '/tmp/test/testFileA.php'
+```
+
+#### Deleting a file
+
+You can delete a file using the `delete()` function:
+
+```php
+Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->delete();
+// returns true on success
+```
+
+#### Getting the basename of a file
+
+You can get the basename of a file using the `getBasename()` function:
+
+```php
+Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->getBasename();
+// 'testFileA.php'
+```
+
+#### Getting the directory location of a file
+
+You can get the location of the directory of a file using the `getDirectory()` function:
+
+```php
+Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->getDirectory();
+// __DIR__ . '/tmp'
+```
+
+#### Getting the full path of a file
+
+You can get the full path of a file using the `getFilepath()` function:
+
+```php
+Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->getFilepath();
+// __DIR__ . '/testFileA.php'
+```
+
+#### Getting the file contents
+
+You can get the contents of a file using the `getContents()` function:
+
+```php
+$contents = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->getContents();
+```
+
+#### Moving a file
+
+You can move a file to a new **directory** using the `move()` function:
+
+```php
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->move('/tmp/test');
+// $file is now in __DIR__ . '/tmp/test/testFileA.php'
+```
+
+#### Updating the namespace of a file
+
+You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in my [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package. 
+
+```php
+$basePath = __DIR__;
+
+$stubs = Stubs::dir($basePath)->namespaces([
+    'Support' => '/src/Support/',
+    'Domain' => '/src/Domain/',
+    'App' => '/src/App/',
+]);
+
+$stubs->getFile('/app/Console/Kernel.php')->namespace('Support\App\Console');
+// file is not in __DIR__ . '/src/Support/App/Console/Kernel.php'
+```
+
+[Checkout a real-life example from one of my packages](https://github.com/ralphjsmit/tall-install/blob/main/src/Actions/DDD/UpdateFileStructureAction.php).
+
+#### Updating the contents of a file
+
+You may update the contents of a file with the `putFile()` method:
+
+```php
+$newContents = 'Hello world!';
+
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->putFile($newContents);
+```
+
+You may also specify a new location for the file:
+```php
+$newContents = 'Hello world!';
+
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->putFile($newContents, '/tmp/test/myFile.php');
+// Will create a file with the "Hello world!" in __DIR__ . '/tmp/test/myFile.php`
+// Old file will still exist
+```
+
+If you just want to move or copy a file, you should use those methods.
+
+#### Updating a namespace of a file
+
+You may replace the namespace of a file with the `replaceNamespace($newNamespace)` method:
+
+```php
+$file = Stub::dir(__DIR)->getFile('/tmp/test/MyClass.php');
+
+$file->replaceNamespace('App\Models');
+
+// $file will now have the namespace App\Models
+```
+
