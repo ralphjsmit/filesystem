@@ -1,6 +1,6 @@
 # Simplify complex stub workflows.
 
-This helps to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks.
+This package helps you to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks. Enjoy!
 
 [![Run Tests](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml)
 
@@ -26,7 +26,8 @@ use RalphJSmit\Stubs\Stubs;
 $stub = Stub::new();
 ```
 
-Next, use it like this:
+You can use a `Stub` configuration like this (I'll talk more about file actions below):
+
 ```php
 $stub->getFile(__DIR__ . '/tmp/testFileA.php')->move(__DIR__ . '/tmp/otherFolder');
 ```
@@ -47,15 +48,16 @@ $stubs = Stubs::dir(__DIR__)->namespaces([
     'App' => '/src/App/',
 ]);
 
-$stubs->getFile('tmp/TestFileA.php')->namespace('Support/Models');
-// Moves __DIR__ . `tmp/testFileA.php` to __DIR__ . `/src/Support/Models/testFileA.php`.
+$stubs->getFile('/tmp/TestFileA.php')->namespace('Support/Models');
+// Moves __DIR__ . `/tmp/testFileA.php` to __DIR__ . `/src/Support/Models/testFileA.php`.
 ```
 
 You can also have multiple stubs together:
 
 ```php
-$stubTemp = Stub::dir(__DIR__ . '/tmp');
-$stubApp = Stub::dir(__DIR__ . '/tmp');
+$stubA = Stub::dir(__DIR__ . '/src');
+$stubB = Stub::dir(__DIR__ . '/app');
+$stubC = Stub::dir(__DIR__ . '/tmp');
 ```
 
 ## Getting a File object
@@ -71,7 +73,7 @@ You can also get a `File` object from a `$stub` instance:
 ```php
 $stub = Stub::dir(__DIR__);
 
-$file = $stub->getFile('/tmp/testFileA.php`);
+$file = $stub->getFile('/tmp/testFileA.php');
 ```
 
 ### Actions on a File object
@@ -83,7 +85,7 @@ If you have a `File` object, you can perform the following actions on it:
 You can copy a file to a new **directory** using the `copy()` function:
 
 ```php
-$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->copy('/tmp/test');
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->copy('/tmp/test');
 // $file is now in __DIR__ . '/tmp/testFileA.php' AND in __DIR__ . '/tmp/test/testFileA.php'
 ```
 
@@ -92,7 +94,7 @@ $file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->copy('/tmp/test');
 You can delete a file using the `delete()` function:
 
 ```php
-Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->delete();
+Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->delete();
 // returns true on success
 ```
 
@@ -128,7 +130,7 @@ Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->getFilepath();
 You can get the contents of a file using the `getContents()` function:
 
 ```php
-$contents = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->getContents();
+$contents = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->getContents();
 ```
 
 #### Moving a file
@@ -136,13 +138,13 @@ $contents = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->getContents();
 You can move a file to a new **directory** using the `move()` function:
 
 ```php
-$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->move('/tmp/test');
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->move('/tmp/test');
 // $file is now in __DIR__ . '/tmp/test/testFileA.php'
 ```
 
 #### Updating the namespace of a file
 
-You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in my [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package. 
+You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in the [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package. 
 
 ```php
 $basePath = __DIR__;
@@ -166,21 +168,21 @@ You may update the contents of a file with the `putFile()` method:
 ```php
 $newContents = 'Hello world!';
 
-$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->putFile($newContents);
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->putFile($newContents);
 ```
 
 You may also specify a new location for the file:
 ```php
 $newContents = 'Hello world!';
 
-$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php`)->putFile($newContents, '/tmp/test/myFile.php');
+$file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->putFile($newContents, '/tmp/test/myFile.php');
 // Will create a file with the "Hello world!" in __DIR__ . '/tmp/test/myFile.php`
 // Old file will still exist
 ```
 
 If you just want to move or copy a file, you should use those methods.
 
-#### Updating a namespace of a file
+#### Updating the namespace of a file
 
 You may replace the namespace of a file with the `replaceNamespace($newNamespace)` method:
 
