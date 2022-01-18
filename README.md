@@ -55,7 +55,7 @@ $stubs->getFile('/tmp/TestFileA.php')->namespace('Support/Models');
 // Moves __DIR__ . `/tmp/testFileA.php` to __DIR__ . `/src/Support/Models/testFileA.php`.
 ```
 
-You can also have multiple stubs together:
+You can also have multiple stub configurations at the same time:
 
 ```php
 $stubA = Stub::dir(__DIR__ . '/src');
@@ -68,7 +68,7 @@ $stubC = Stub::dir(__DIR__ . '/tmp');
 You can get a `File` object by directly calling `file()` on the `Stub` class:
 
 ```php
-$file = Stub::file(__DIR__ . '/tmp/testFileA.php`);
+$file = Stub::file(__DIR__ . '/tmp/testFileA.php');
 ```
 
 You can also get a `File` object from a `$stub` instance:
