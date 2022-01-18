@@ -1,6 +1,6 @@
 <?php
 
-namespace RalphJSmit\Stubs\Exceptions;
+namespace RalphJSmit\Filesystem\Exceptions;
 
 class NamespaceNotFoundException extends \Exception
 {

@@ -1,14 +1,13 @@
 <?php
 
-namespace RalphJSmit\Stubs;
+namespace RalphJSmit\Filesystem;
 
-class Stubs
+class Stub
 {
     public function __construct(
         protected string $basepath = '',
         protected array $namespaces = [],
-    ) {
-    }
+    ) {}
 
     public static function dir(string $basepath): static
     {

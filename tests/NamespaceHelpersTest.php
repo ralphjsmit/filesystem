@@ -1,7 +1,7 @@
 <?php
 
-use RalphJSmit\Stubs\Exceptions\NamespaceNotFoundException;
-use RalphJSmit\Stubs\Stubs;
+use RalphJSmit\Filesystem\Exceptions\NamespaceNotFoundException;
+use RalphJSmit\Filesystem\Stub;
 
 it('can update the namespace of a file', function () {
     $contents = <<<PHP
@@ -14,10 +14,10 @@ it('can update the namespace of a file', function () {
         }
         PHP;
 
-    Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
+    Stub::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
         ->putFile($contents);
 
-    $file = Stubs::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
+    $file = Stub::file(__DIR__ . '/tmp/demo-application/App/Models/User.php')
         ->putInFolder(__DIR__ . '/tmp/demo-application/Domain/Auth/Models/');
 
     $updatedFile = $file->replaceNamespace('Domain\Auth\Models');
@@ -39,7 +39,7 @@ it('can update the namespace of a file', function () {
 });
 
 test('it can move a file based on the namespace', function () {
-    $stubs = Stubs::new()->namespaces([
+    $stubs = Stub::new()->namespaces([
         'Support' => __DIR__ . '/tmp/demo-application/Support',
         'Domain' => __DIR__ . '/tmp/demo-application/Domain',
         'App' => __DIR__ . '/tmp/demo-application/App',
@@ -59,7 +59,7 @@ test('it can move a file based on the namespace', function () {
 test('it throws an exception when the namespace is not found', function () {
     $this->expectException(NamespaceNotFoundException::class);
 
-    $stubs = Stubs::new();
+    $stubs = Stub::new();
 
     $stubs->getFile(__DIR__ . '/tmp/demo-application/App/Models/User.php')
         ->namespace('Support\Models');

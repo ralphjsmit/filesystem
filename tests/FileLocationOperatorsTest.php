@@ -1,9 +1,9 @@
 <?php
 
-use RalphJSmit\Stubs\Stubs;
+use RalphJSmit\Filesystem\Stub;
 
 it('can copy a file to a new location', function () {
-    $file = Stubs::file(__DIR__ . '/__fixtures__/demo-application/CopyFile.php')
+    $file = Stub::file(__DIR__ . '/__fixtures__/demo-application/CopyFile.php')
         ->copy(__DIR__ . '/tmp/demo-application');
 
     expect(
@@ -17,7 +17,7 @@ it('can copy a file to a new location', function () {
 });
 
 it('can move a file to a new location', function () {
-    $file = Stubs::file(__DIR__ . '/__fixtures__/demo-application/MoveFile.php')
+    $file = Stub::file(__DIR__ . '/__fixtures__/demo-application/MoveFile.php')
         ->copy(__DIR__ . '/tmp/demo-application/a');
 
     $contents = file_get_contents(__DIR__ . '/__fixtures__/demo-application/MoveFile.php');
@@ -26,7 +26,7 @@ it('can move a file to a new location', function () {
         ->filepath->toBe(__DIR__ . '/tmp/demo-application/a/MoveFile.php')
         ->getBasepath()->toBe('');
 
-    $file = Stubs::file(__DIR__ . '/tmp/demo-application/a/MoveFile.php')
+    $file = Stub::file(__DIR__ . '/tmp/demo-application/a/MoveFile.php')
         ->move(__DIR__ . '/tmp/demo-application/b');
 
     expect(__DIR__ . '/__fixtures__/demo-application/a/MoveFile.php')->not->toExist();

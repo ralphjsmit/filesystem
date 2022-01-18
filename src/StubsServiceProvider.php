@@ -1,6 +1,6 @@
 <?php
 
-namespace RalphJSmit\Stubs;
+namespace RalphJSmit\Filesystem;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

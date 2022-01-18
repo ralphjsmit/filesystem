@@ -1,12 +1,12 @@
 {
-  "name": "ralphjsmit/stubs",
-  "description": "A package to simplify complex stub workflows.",
+  "name": "ralphjsmit/filesystem",
+  "description": "A fluent filesystem package for PHP.",
   "keywords": [
     "ralphjsmit",
     "laravel",
-    "stubs"
+    "filesystem"
   ],
-  "homepage": "https://github.com/ralphjsmit/stubs",
+  "homepage": "https://github.com/ralphjsmit/filesystem",
   "license": "MIT",
   "authors": [
     {
@@ -32,27 +32,28 @@
   },
   "autoload": {
     "psr-4": {
-      "RalphJSmit\\Stubs\\": "src",
-      "RalphJSmit\\Stubs\\Database\\Factories\\": "database/factories"
+      "RalphJSmit\\Filesystem\\": "src",
+      "RalphJSmit\\Filesystem\\Database\\Factories\\": "database/factories"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "RalphJSmit\\Stubs\\Tests\\": "tests"
+      "RalphJSmit\\Filesystem\\Tests\\": "tests"
     }
   },
   "scripts": {},
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "RalphJSmit\\Stubs\\StubsServiceProvider"
+        "RalphJSmit\\Filesystem\\StubsServiceProvider"
       ],
-      "aliases": {
-        "Stubs": "RalphJSmit\\Stubs\\Facades\\Stubs"
-      }
+      "aliases": {}
     }
   },
   "minimum-stability": "dev",

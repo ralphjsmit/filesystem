@@ -1,18 +1,17 @@
-![Stubs Banner](https://github.com/ralphjsmit/stubs/blob/main/docs/images/stubs.jpg)
+![Stubs Banner](https://github.com/ralphjsmit/filesystem/blob/main/docs/images/filesystem.jpg)
 
-
-# Simplify complex stub workflows.
+# A fluent filesystem package for PHP
 
 This package helps you to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks. Enjoy!
 
-[![Run Tests](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/stubs/actions/workflows/run-tests.yml)
+[![Run Tests](https://github.com/ralphjsmit/filesystem/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/fiesystem/actions/workflows/run-tests.yml)
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require ralphjsmit/stubs
+composer require ralphjsmit/filesystem
 ```
 
 ## Usage
@@ -24,7 +23,7 @@ This package works by providing you with a base `Stub` class and a `File` class.
 You can create a new `Stub` configuration with `Stub::new()`:
 
 ```php
-use RalphJSmit\Stubs\Stubs;
+use RalphJSmit\Filesystem\Stub;
 
 $stub = Stub::new();
 ```
@@ -36,6 +35,7 @@ $stub->getFile(__DIR__ . '/tmp/testFileA.php')->move(__DIR__ . '/tmp/otherFolder
 ```
 
 You can also set a base directory for your `Stub`:
+
 ```php
 $stub = Stub::dir(__DIR__);
 
@@ -147,7 +147,7 @@ $file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->move('/tmp/test');
 
 #### Updating the namespace of a file
 
-You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in the [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package. 
+You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in the [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package.
 
 ```php
 $basePath = __DIR__;
@@ -175,6 +175,7 @@ $file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->putFile($newContents)
 ```
 
 You may also specify a new location for the file:
+
 ```php
 $newContents = 'Hello world!';
 

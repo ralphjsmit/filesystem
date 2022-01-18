@@ -1,9 +1,9 @@
 <?php
 
-namespace RalphJSmit\Stubs;
+namespace RalphJSmit\Filesystem;
 
 use Illuminate\Support\Str;
-use RalphJSmit\Stubs\Exceptions\NamespaceNotFoundException;
+use RalphJSmit\Filesystem\Exceptions\NamespaceNotFoundException;
 
 class File
 {
@@ -11,8 +11,7 @@ class File
         public string $filepath,
         protected string $basepath = '',
         protected array $namespaces = [],
-    ) {
-    }
+    ) {}
 
     public function copy(string $destinationPath): static
     {
@@ -88,11 +87,11 @@ class File
 
     public function putFile(mixed $contents, string $destinationPath = null): static
     {
-        if (! $destinationPath) {
+        if ( ! $destinationPath ) {
             $destinationPath = $this->filepath;
         }
 
-        if (! file_exists(dirname($this->basepath . $destinationPath))) {
+        if ( ! file_exists(dirname($this->basepath . $destinationPath)) ) {
             mkdir(dirname($this->basepath . $destinationPath), 0777, true);
         }
 

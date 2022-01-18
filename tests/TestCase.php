@@ -1,9 +1,9 @@
 <?php
 
-namespace RalphJSmit\Stubs\Tests;
+namespace RalphJSmit\Filesystem\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use RalphJSmit\Stubs\StubsServiceProvider;
+use RalphJSmit\Filesystem\StubsServiceProvider;
 
 class TestCase extends Orchestra
 {
