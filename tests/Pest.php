@@ -2,12 +2,11 @@
 
 use RalphJSmit\Filesystem\Stub;
 use RalphJSmit\Filesystem\Tests\TestCase;
-
 use function RalphJSmit\PestPluginFilesystem\rmdir_recursive;
 
 uses(TestCase::class)
     ->beforeEach(function () {
-        if ( file_exists(__DIR__ . '/tmp') ) {
+        if (file_exists(__DIR__ . '/tmp')) {
             rmdir_recursive(__DIR__ . '/tmp');
         }
 
