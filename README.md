@@ -1,3 +1,6 @@
+![Stubs Banner](https://github.com/ralphjsmit/stubs/blob/main/docs/images/stubs.jpg)
+
+
 # Simplify complex stub workflows.
 
 This package helps you to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks. Enjoy!
