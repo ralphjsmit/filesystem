@@ -152,7 +152,7 @@ You may update the namespace of a file and move it to the correct directory with
 ```php
 $basePath = __DIR__;
 
-$stubs = Stubs::dir($basePath)->namespaces([
+$stubs = Stub::dir($basePath)->namespaces([
     'Support' => '/src/Support/',
     'Domain' => '/src/Domain/',
     'App' => '/src/App/',
