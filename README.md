@@ -45,7 +45,7 @@ $stub->getFile('/tmp/testFileA.php')->move('/tmp/otherFolder');
 If you already have a `$stub` instance, you can configure namespaces on them. Those namespaces are used on the `File` object for the `->namespace()` action. It basically means that you define the directories for each namespace in your project.
 
 ```php
-$stubs = Stubs::dir(__DIR__)->namespaces([
+$stubs = Stub::dir(__DIR__)->namespaces([
     'Support' => '/src/Support/',
     'Domain' => '/src/Domain/',
     'App' => '/src/App/',
