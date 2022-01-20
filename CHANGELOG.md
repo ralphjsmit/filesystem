@@ -2,6 +2,10 @@
 
 All notable changes to `stubs` will be documented in this file.
 
+## 1.3.0 - 2022-01-20
+
+- Add Laravel 9 support
+
 ## 1.2.0 - 2022-01-18
 
 - Update this package to be called `ralphjsmit/filesystem` instead of `ralphjsmit/stubs`
