@@ -19,7 +19,7 @@
     "php": "^8.0",
     "illuminate/contracts": "^8.73|^9.0",
     "spatie/laravel-package-tools": "^1.9.2",
-    "symfony/finder": "^5.4"
+    "symfony/finder": "^5.4|^6.0"
   },
   "require-dev": {
     "nunomaduro/collision": "^5.10",
