@@ -6,6 +6,8 @@ This package helps you to speed up the process of moving and copying files. It a
 
 [![Run Tests](https://github.com/ralphjsmit/filesystem/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/fiesystem/actions/workflows/run-tests.yml)
 
+[⚡️ See the release article on my website or subscribe to my newsletter for an occassional update](https://ralphjsmit.com/php-fluent-filesystem-package/)
+
 ## Installation
 
 You can install the package via composer:
