@@ -6,7 +6,7 @@ This package helps you to speed up the process of moving and copying files. It a
 
 [![Run Tests](https://github.com/ralphjsmit/filesystem/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/fiesystem/actions/workflows/run-tests.yml)
 
-[⚡️ See the release article on my website or subscribe to my newsletter for an occassional update](https://ralphjsmit.com/php-fluent-filesystem-package/)
+[⚡️ See the release article on my website or subscribe to my newsletter for an occasional update](https://ralphjsmit.com/php-fluent-filesystem-package/)
 
 ## Installation
 
@@ -149,7 +149,7 @@ $file = Stub::dir(__DIR__)->getFile('/tmp/testFileA.php')->move('/tmp/test');
 
 #### Updating the namespace of a file
 
-You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update the namespace of it. I use this technique in the [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package.
+You may update the namespace of a file and move it to the correct directory with the `namespace()` helper. This is ideal if you need to move a PHP-file to a new directory *and* update its namespace. I use this technique in the [ralphjsmit/tall-install](https://github.com/ralphjsmit/tall-install/) package.
 
 ```php
 $basePath = __DIR__;
@@ -202,7 +202,7 @@ $file->replaceNamespace('App\Models');
 
 ## General
 
-🐞 If you spot a bug, please submit a detailed issue and I'll try to fix it as soon as possible.
+🐞 If you spot a bug, please submit a detailed issue, and I'll try to fix it as soon as possible.
 
 🔐 If you discover a vulnerability, please review [our security policy](../../security/policy).
 
