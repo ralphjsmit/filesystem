@@ -2,6 +2,10 @@
 
 All notable changes to `stubs` will be documented in this file.
 
+## 1.4.0 - 2023-02-17
+
+- Add Laravel 10 support in #11
+
 ## 1.3.0 - 2022-01-20
 
 - Add Laravel 9 support
