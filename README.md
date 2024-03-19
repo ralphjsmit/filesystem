@@ -4,7 +4,8 @@
 
 This package helps you to speed up the process of moving and copying files. It also makes replacing namespaces much easier, thus making it an invaluable tool for heavy filesystem tasks. Enjoy!
 
-[![Run Tests](https://github.com/ralphjsmit/filesystem/actions/workflows/run-tests.yml/badge.svg?event=push)](https://github.com/ralphjsmit/fiesystem/actions/workflows/run-tests.yml)
+> [!IMPORTANT]  
+> This package is only updated until Laravel 10. 
 
 [⚡️ See the release article on my website or subscribe to my newsletter for an occasional update](https://ralphjsmit.com/php-fluent-filesystem-package/)
 
